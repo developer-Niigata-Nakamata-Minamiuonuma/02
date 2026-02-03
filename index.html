@@ -5,29 +5,43 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rakuten Mobile（模擬）</title>
 
+<!-- M PLUS 1 SemiBold -->
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@600&display=swap" rel="stylesheet">
+
 <style>
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: 'M PLUS 1', sans-serif;
   background: #f2f2f2;
 }
 
+/* ===== ヘッダー ===== */
 .header {
   background: #bf0000;
-  color: white;
-  padding: 14px;
-  text-align: center;
-  font-weight: bold;
+  color: #fff;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.header-title {
   font-size: 16px;
 }
 
+.menu-btn {
+  font-size: 22px;
+  cursor: pointer;
+}
+
+/* ===== メイン ===== */
 .container {
   padding: 16px;
 }
 
 .status {
   background: #fff;
-  padding: 12px 16px;
+  padding: 14px;
   border-radius: 12px;
   font-size: 14px;
   margin-bottom: 16px;
@@ -37,11 +51,12 @@ body {
   margin-bottom: 6px;
 }
 
+/* ===== 円 ===== */
 .circle-wrap {
   position: relative;
   width: 220px;
   height: 220px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 svg {
@@ -68,48 +83,84 @@ svg {
   left: 50%;
   transform: translate(-50%, -50%);
   font-size: 34px;
-  font-weight: bold;
   color: #bf0000;
 }
 
 .label {
   text-align: center;
-  margin-top: 12px;
   font-size: 14px;
   color: #666;
 }
 
-.footer {
+/* ===== ハンバーガーメニュー ===== */
+.overlay {
   position: fixed;
-  bottom: 0;
+  top: 0;
   left: 0;
   right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,0.4);
+  display: none;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  right: -260px;
+  width: 260px;
+  height: 100%;
   background: #fff;
-  border-top: 1px solid #ddd;
-  display: flex;
-  justify-content: space-around;
-  padding: 8px 0;
-  font-size: 12px;
+  padding: 16px;
+  transition: right 0.3s ease;
 }
 
-.footer div {
-  text-align: center;
-  color: #666;
+.drawer.open {
+  right: 0;
 }
 
-.footer .active {
+.overlay.show {
+  display: block;
+}
+
+.drawer h3 {
+  margin-top: 0;
+  font-size: 15px;
+  margin-bottom: 12px;
+}
+
+.drawer ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.drawer li {
+  padding: 12px 0;
+  border-bottom: 1px solid #eee;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.drawer li:last-child {
+  border-bottom: none;
+}
+
+.drawer .important {
   color: #bf0000;
-  font-weight: bold;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">Rakuten Mobile</div>
+<!-- ヘッダー -->
+<div class="header">
+  <div class="header-title">Rakuten Mobile</div>
+  <div class="menu-btn" onclick="openMenu()">☰</div>
+</div>
 
+<!-- メイン -->
 <div class="container">
-
   <div class="status">
     <div>提供通信：Rakuten</div>
     <div>通信状態：良好</div>
@@ -125,14 +176,34 @@ svg {
   </div>
 
   <div class="label">今月のデータ通信量</div>
-
 </div>
 
-<div class="footer">
-  <div class="active">ホーム</div>
-  <div>利用状況</div>
-  <div>設定</div>
+<!-- オーバーレイ -->
+<div class="overlay" onclick="closeMenu()"></div>
+
+<!-- ドロワー -->
+<div class="drawer" id="drawer">
+  <h3>メニュー</h3>
+  <ul>
+    <li>利用状況</li>
+    <li>料金・お支払い</li>
+    <li>契約プラン</li>
+    <li>各種設定</li>
+    <li class="important">ログアウト</li>
+  </ul>
 </div>
+
+<script>
+function openMenu() {
+  document.querySelector('.drawer').classList.add('open');
+  document.querySelector('.overlay').classList.add('show');
+}
+
+function closeMenu() {
+  document.querySelector('.drawer').classList.remove('open');
+  document.querySelector('.overlay').classList.remove('show');
+}
+</script>
 
 </body>
 </html>
