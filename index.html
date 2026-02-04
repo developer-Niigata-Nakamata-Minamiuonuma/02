@@ -21,30 +21,30 @@ body {
   padding: 14px 16px;
   display: flex;
   align-items: center;
+  justify-content: space-between;
 }
 
 .menu-btn {
   font-size: 22px;
-  margin-right: 12px;
   cursor: pointer;
 }
 
-/* ===== サイドメニュー ===== */
+/* ===== サイドメニュー（右） ===== */
 .sidebar {
   position: fixed;
   top: 0;
-  left: -260px;
+  right: -260px;
   width: 240px;
   height: 100%;
   background: #fff;
-  box-shadow: 2px 0 6px rgba(0,0,0,0.2);
-  transition: left 0.3s;
+  box-shadow: -2px 0 6px rgba(0,0,0,0.2);
+  transition: right 0.3s;
   padding: 16px;
   z-index: 100;
 }
 
 .sidebar.open {
-  left: 0;
+  right: 0;
 }
 
 .sidebar a {
@@ -140,8 +140,8 @@ select {
 
 <!-- ヘッダー -->
 <div class="header">
-  <div class="menu-btn" onclick="toggleMenu()">☰</div>
   <div>通信量確認</div>
+  <div class="menu-btn" onclick="toggleMenu()">☰</div>
 </div>
 
 <div class="container">
