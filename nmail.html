@@ -58,16 +58,7 @@ body {
   margin-top: 4px;
 }
 
-/* ===== フォーム ===== */
-.input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-family: 'M PLUS 1', sans-serif;
-}
-
+/* ===== ボタン ===== */
 .action-btn {
   width: 100%;
   border: none;
@@ -77,20 +68,19 @@ body {
   border-radius: 10px;
   font-size: 14px;
   cursor: pointer;
+  margin-top: 10px;
 }
 
-/* ===== リンクボタン ===== */
 .link-btn {
-  display: block;
   width: 100%;
-  text-align: center;
+  border: 1px solid #bf0000;
+  background: #fff;
+  color: #bf0000;
   padding: 12px;
   border-radius: 10px;
-  background: #f5f5f5;
-  color: #333;
-  text-decoration: none;
   font-size: 14px;
-  margin-bottom: 8px;
+  cursor: pointer;
+  margin-top: 10px;
 }
 </style>
 </head>
@@ -115,36 +105,34 @@ body {
   <!-- メールログイン -->
   <div class="card">
     <div class="card-title">メールログイン</div>
-    <input class="input" type="text" placeholder="メールアドレス">
-    <input class="input" type="password" placeholder="パスワード">
-    <button class="action-btn" onclick="loginMail()">ログイン</button>
-    <div class="sub">※ 実際のログインは行われません</div>
+    <div class="sub">
+      Webメールにログインしてメールを確認できます
+    </div>
+    <button class="action-btn" onclick="openMailLogin()">
+      メールにログイン
+    </button>
   </div>
 
-  <!-- アプリ・設定 -->
+  <!-- アプリ / 設定 -->
   <div class="card">
-    <div class="card-title">アプリ・設定</div>
-
-    <a class="link-btn" href="#" onclick="openLink('mailapp')">
-      メールアプリをダウンロード
-    </a>
-
-    <a class="link-btn" href="#" onclick="openLink('setting')">
-      メール設定方法を見る
-    </a>
+    <div class="card-title">メールアプリ・設定方法</div>
+    <button class="link-btn" onclick="openAppDownload()">
+      メールアプリのダウンロード
+    </button>
+    <button class="link-btn" onclick="openMailSetup()">
+      設定方法を見る
+    </button>
   </div>
 
   <!-- Googleアカウント -->
   <div class="card">
-    <div class="card-title">Googleアカウント連携</div>
-
-    <a class="link-btn" href="#" onclick="openLink('google')">
-      Nメール Googleアカウント発行申請
-    </a>
-
+    <div class="card-title">Nメール Googleアカウント</div>
     <div class="sub">
-      Gmail等のGoogleサービスと連携するための申請（模擬）
+      NメールをGoogleアカウントとして利用できます
     </div>
+    <button class="action-btn" onclick="openGoogleApply()">
+      Googleアカウント発行申請
+    </button>
   </div>
 
   <!-- 注意 -->
@@ -159,17 +147,25 @@ function goBack() {
   history.back();
 }
 
-function loginMail() {
-  alert("メールログイン（模擬）");
+/* ===== メールログイン ===== */
+function openMailLogin() {
+  window.open(
+    "https://s323.xrea.com/mailr/?_gl=1*1597l0u*_gcl_au*MTgxNDcyMDU4Ni4xNzYwMTMxMzM2LjE0MDQwNzYyNjQuMTc2MDMwNjQwMi4xNzYwMzA3MDYz*_ga*NjQ4NDg3NTU3LjE3NjAxMzEzMzY.*_ga_J8YE7Q8ZQD*czE3NjAzMDU0MjEkbzgkZzEkdDE3NjAzMDcxMjYkajEkbDAkaDI4NzQ0ODUwMg..",
+    "_blank"
+  );
 }
 
-function openLink(type) {
-  const map = {
-    mailapp: "https://example.com/mail-app",
-    setting: "https://example.com/mail-setting",
-    google: "https://example.com/google-account"
-  };
-  window.open(map[type], "_blank");
+/* ===== ダミーリンク ===== */
+function openAppDownload() {
+  alert('メールアプリのダウンロード（模擬）');
+}
+
+function openMailSetup() {
+  alert('設定方法サイト（模擬）');
+}
+
+function openGoogleApply() {
+  alert('Googleアカウント発行申請（模擬）');
 }
 </script>
 
