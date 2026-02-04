@@ -47,6 +47,36 @@ body {
   margin-bottom: 10px;
 }
 
+/* ===== ユーザーID ===== */
+.user-id {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.user-id span {
+  font-size: 15px;
+  letter-spacing: 0.5px;
+}
+
+.copy-btn {
+  font-size: 12px;
+  background: #f5f5f5;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'M PLUS 1', sans-serif;
+}
+
+.copy-msg {
+  margin-top: 6px;
+  font-size: 12px;
+  color: #bf0000;
+  display: none;
+}
+
+/* ===== プルダウン ===== */
 .card-title select {
   border: none;
   background: #f5f5f5;
@@ -64,9 +94,7 @@ body {
   margin: 10px auto 0;
 }
 
-svg {
-  transform: rotate(-90deg);
-}
+svg { transform: rotate(-90deg); }
 
 .bg {
   fill: none;
@@ -116,13 +144,8 @@ svg {
   transition: right 0.3s ease;
 }
 
-.drawer.open {
-  right: 0;
-}
-
-.overlay.show {
-  display: block;
-}
+.drawer.open { right: 0; }
+.overlay.show { display: block; }
 
 .drawer-header {
   background: #bf0000;
@@ -159,8 +182,17 @@ svg {
   <div onclick="openMenu()">☰</div>
 </div>
 
-<!-- メイン -->
 <div class="container">
+
+  <!-- ユーザーID -->
+  <div class="card">
+    <div class="card-title">ユーザーID</div>
+    <div class="user-id">
+      <span id="userId">RM-1234-5678</span>
+      <button class="copy-btn" onclick="copyUserId()">コピー</button>
+    </div>
+    <div class="copy-msg" id="copyMsg">コピーしました</div>
+  </div>
 
   <!-- 通信情報 -->
   <div class="card">
@@ -182,8 +214,8 @@ svg {
 
     <div class="circle-wrap">
       <svg width="220" height="220">
-        <circle class="bg" cx="110" cy="110" r="90"></circle>
-        <circle class="progress" cx="110" cy="110" r="90"></circle>
+        <circle class="bg" cx="110" cy="110" r="90"/>
+        <circle class="progress" cx="110" cy="110" r="90"/>
       </svg>
       <div class="center-text">無制限</div>
     </div>
@@ -193,7 +225,7 @@ svg {
     </div>
   </div>
 
-  <!-- 注意書き -->
+  <!-- 注意 -->
   <div class="card">
     ※ 本画面はデモ（模擬）表示です。<br>
     実際の通信量・速度を示すものではありません。
@@ -239,11 +271,18 @@ function changeMonth() {
     "2026-01": "高速データ通信（2026年1月）",
     "2025-12": "高速データ通信（2025年12月）"
   };
-
   label.textContent = map[select.value];
+}
+
+function copyUserId() {
+  const text = document.getElementById('userId').textContent;
+  navigator.clipboard.writeText(text);
+
+  const msg = document.getElementById('copyMsg');
+  msg.style.display = 'block';
+  setTimeout(() => msg.style.display = 'none', 2000);
 }
 </script>
 
 </body>
 </html>
-
