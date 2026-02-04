@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rakuten Mobile（模擬）</title>
 
-<!-- フォント：M PLUS 1 SemiBold 600 -->
 <link href="https://fonts.googleapis.com/css2?family=M+PLUS+1:wght@600&display=swap" rel="stylesheet">
 
 <style>
@@ -23,6 +22,32 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+
+/* ===== 重要なお知らせ ===== */
+.notice {
+  background: #fff4f4;
+  border-bottom: 1px solid #ffd6d6;
+  padding: 12px 16px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+.notice-title {
+  display: flex;
+  align-items: center;
+  color: #bf0000;
+}
+
+.notice-title span {
+  margin-left: 8px;
+}
+
+.notice-detail {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #333;
+  display: none;
 }
 
 /* ===== メイン ===== */
@@ -52,11 +77,6 @@ body {
   display: flex;
   justify-content: space-between;
   align-items: center;
-}
-
-.user-id span {
-  font-size: 15px;
-  letter-spacing: 0.5px;
 }
 
 .copy-btn {
@@ -176,10 +196,20 @@ svg { transform: rotate(-90deg); }
 
 <body>
 
-<!-- ヘッダー -->
 <div class="header">
   <div>Rakuten Mobile</div>
   <div onclick="openMenu()">☰</div>
+</div>
+
+<!-- 重要なお知らせ -->
+<div class="notice" onclick="toggleNotice()">
+  <div class="notice-title">
+    ⚠️ <span>重要なお知らせ</span>
+  </div>
+  <div class="notice-detail" id="noticeDetail">
+    現在、一部地域において通信が不安定になる場合があります。<br>
+    詳細は公式サイトをご確認ください。（模擬表示）
+  </div>
 </div>
 
 <div class="container">
@@ -233,10 +263,8 @@ svg { transform: rotate(-90deg); }
 
 </div>
 
-<!-- オーバーレイ -->
 <div class="overlay" onclick="closeMenu()"></div>
 
-<!-- ドロワー -->
 <div class="drawer">
   <div class="drawer-header">
     <div>メニュー</div>
@@ -262,10 +290,14 @@ function closeMenu() {
   document.querySelector('.overlay').classList.remove('show');
 }
 
+function toggleNotice() {
+  const detail = document.getElementById('noticeDetail');
+  detail.style.display = detail.style.display === 'block' ? 'none' : 'block';
+}
+
 function changeMonth() {
   const select = document.getElementById('monthSelect');
   const label = document.getElementById('usageLabel');
-
   const map = {
     "2026-02": "高速データ通信（2026年2月）",
     "2026-01": "高速データ通信（2026年1月）",
@@ -277,7 +309,6 @@ function changeMonth() {
 function copyUserId() {
   const text = document.getElementById('userId').textContent;
   navigator.clipboard.writeText(text);
-
   const msg = document.getElementById('copyMsg');
   msg.style.display = 'block';
   setTimeout(() => msg.style.display = 'none', 2000);
